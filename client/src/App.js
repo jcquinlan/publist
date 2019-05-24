@@ -1,26 +1,29 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import history from './history';
+import { LoginPage, RegisterPage, ListPage } from './pages';
+import { checkForAuthTokens } from './utility/tokenHelper';
+import Nav from './components/Nav';
 
-function App() {
+function Index() {
+  return <h2>Home</h2>;
+}
+
+function App(props) {
+  checkForAuthTokens();
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <Router history={history}>
+          <Nav />
+            <Switch>
+              <Route path="/" exact component={Index} />
+              <Route path="/login" component={LoginPage} />
+              <Route path="/list" component={ListPage} />
+              <Route path="/register" component={RegisterPage} />
+            </Switch>
+      </Router>
   );
 }
+
 
 export default App;
