@@ -32,13 +32,13 @@ const deleteRequest = (url, options) => {
 };
 
 const login = (username, password) => {
-    return post('/token/', { username, password })
+    return post('/token', { username, password })
         .then(handleNewTokens)
         .then(() => history.replace(routeDefinitions.list));
 };
 
 const register = (username, email, password) => {
-    return post('/register/', { username, email, password })
+    return post('/register', { username, email, password })
         .then(() => login(username, password));
 };
 

@@ -20,14 +20,16 @@ from core.views.frontend_view import FrontendView
 from core.views.register import RegisterView
 from core.views.obtain_pair_view import TokenObtainPairView
 from rest_framework_simplejwt.views import (
-    TokenRefreshView,
+    TokenRefreshView
 )
+from core.views.search_books_view import SearchBooksView
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls')),
-    path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('api/register/', RegisterView.as_view(), name='register'),
+    path('admin', admin.site.urls),
+    path('api-auth', include('rest_framework.urls')),
+    path('api/token', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/register', RegisterView.as_view(), name='register'),
+    path('api/books/search', SearchBooksView.as_view(), name='search_books'),
     re_path(r'^', FrontendView.as_view()),
 ]

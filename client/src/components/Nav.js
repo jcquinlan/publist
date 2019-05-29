@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import { logOutUser } from '../utility/tokenHelper';
 
 function Nav(props) {
@@ -36,4 +36,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(Nav);
+export default withRouter(connect(mapStateToProps)(Nav));
