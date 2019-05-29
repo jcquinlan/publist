@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { searchBooks } from '../utility/bookSearchHelper';
 import BookSearchList from './BookSearchList';
+import createBook from '../utility/createBook';
 
 function NewEntry(props) {
     const [query, setQuery] = useState('');
@@ -10,8 +11,9 @@ function NewEntry(props) {
         event.preventDefault();
         searchBooks(query)
             .then(books => {
-                setBooks(books.items);
                 console.log(books.items);
+                const cleanedBooks = books.items.map(createBook);
+                setBooks(cleanedBooks);
             });
     }
 
