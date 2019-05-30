@@ -22,7 +22,10 @@ from core.views.obtain_pair_view import TokenObtainPairView
 from rest_framework_simplejwt.views import (
     TokenRefreshView
 )
+
+# Business Logic Views
 from core.views.search_books_view import SearchBooksView
+from core.views.user_books.user_books_list_view import UserBooksListView
 
 urlpatterns = [
     path('admin', admin.site.urls),
@@ -31,5 +34,6 @@ urlpatterns = [
     path('api/token/refresh', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/register', RegisterView.as_view(), name='register'),
     path('api/books/search', SearchBooksView.as_view(), name='search_books'),
+    path('api/books/<username>', UserBooksListView.as_view(), name='user_books_list'),
     re_path(r'^', FrontendView.as_view()),
 ]
