@@ -112,6 +112,8 @@ SIMPLE_JWT = {
 CORS_ORIGIN_WHITELIST = [
     "https://www.publist.me",
     "https://publist.me",
+    "https://www.publist.herokuapp.com",
+    "https://publist.herokuapp.com",
     "http://localhost:3000",
     "http://localhost:8000",
     "http://127.0.0.1:8000",

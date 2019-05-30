@@ -3,6 +3,7 @@ import json
 import requests
 from rest_framework.views import APIView
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from django.views.decorators.csrf import csrf_exempt
 from django.conf import settings
 
@@ -11,6 +12,8 @@ class SearchBooksView(APIView):
     """
     Uses the Google Books API to retrieve book search results for a user.
     """
+
+    permission_classes = (AllowAny,)
 
     def post(self, request):
         """
