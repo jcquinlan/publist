@@ -34,7 +34,7 @@ const deleteRequest = (url, options) => {
 const login = (username, password) => {
     return post('/token', { username, password })
         .then(handleNewTokens)
-        .then(() => history.replace(routeDefinitions.list));
+        .then(() => history.replace(routeDefinitions.list(username)));
 };
 
 const register = (username, email, password) => {

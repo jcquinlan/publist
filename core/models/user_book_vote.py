@@ -7,5 +7,8 @@ class UserBookVote(models.Model):
     so we can track the IP and only accept votes for books from unique
     addresses.
     """
-    book = models.ForeignKey(UserBook, on_delete=models.CASCADE)
-    ip_address = models.CharField(max_length=64)
+    book = models.ForeignKey(UserBook, related_name="votes", on_delete=models.CASCADE)
+    ip_address = models.CharField(max_length=64, null=True)
+
+    def __str__(self):
+        return self.ip_address

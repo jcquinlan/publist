@@ -1,7 +1,9 @@
 
 export default {
     homepage: '/',
-    list: '/list',
+    add: username => `/${username}/add`,
+    list: username => `/${username}`,
+    searchUsers: '/search',
     register: '/register/',
     login: '/login/',
     changePassword: '/password/change/',

@@ -15,5 +15,7 @@ djangorestframework-simplejwt = "*"
 django-cors-headers = "*"
 requests = "*"
 python-dotenv = "*"
+pyhumps = "*"
+django-ipware = "*"
 
 [dev-packages]

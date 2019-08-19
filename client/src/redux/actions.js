@@ -11,4 +11,11 @@ const logOutUserAction= () => {
     }
 }
 
-export { logInUserAction, logOutUserAction };
+const setActiveUserAction = username => {
+    return {
+        type: 'SET_ACTIVE_USER',
+        payload: username
+    }
+}
+
+export { logInUserAction, logOutUserAction, setActiveUserAction };

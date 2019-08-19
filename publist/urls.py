@@ -26,6 +26,8 @@ from rest_framework_simplejwt.views import (
 # Business Logic Views
 from core.views.search_books_view import SearchBooksView
 from core.views.user_books.user_books_list_view import UserBooksListView
+from core.views.user_books.user_books_voting_view import UserBooksVotingView
+from core.views.user_search.user_search_list_view import UserSearchListView
 
 urlpatterns = [
     path('admin', admin.site.urls),
@@ -35,5 +37,7 @@ urlpatterns = [
     path('api/register', RegisterView.as_view(), name='register'),
     path('api/books/search', SearchBooksView.as_view(), name='search_books'),
     path('api/books/<username>', UserBooksListView.as_view(), name='user_books_list'),
+    path('api/users/<username_query>', UserSearchListView.as_view(), name='user_search_list'),
+    path('api/vote/<book_id>', UserBooksVotingView.as_view(), name='user_books_voting'),
     re_path(r'^', FrontendView.as_view()),
 ]

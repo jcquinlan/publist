@@ -1,3 +1,4 @@
+import humps
 from django.db import transaction
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
@@ -23,17 +24,18 @@ class UserBooksListView(APIView):
     def get(self, request, username):
         user = get_object_or_404(User, username=username)
         books = UserBook.objects.filter(user=user)
-        serializer = UserBookReadSerializer(books, many=True)
+        serializer = UserBookReadSerializer(books, many=True, context={'request': request})
 
         return Response(serializer.data, status=200)
 
     @transaction.atomic
     def post(self, request, username):
         user = get_object_or_404(User, username=username)
-        authors = request.data.pop('authors')
-        genres = request.data.pop('genres')
+        data = humps.decamelize(request.data)
+        authors = data.pop('authors', [])
+        genres = data.pop('genres', [])
 
-        serializer = UserBookWriteSerializer(data={**request.data, "user": user.id})
+        serializer = UserBookWriteSerializer(data={**data, "user": user.id})
 
         if serializer.is_valid():
             book = serializer.save()
@@ -42,7 +44,7 @@ class UserBooksListView(APIView):
                 UserBookGenre.objects.create(book=book, genre=genre)
 
             for author in authors:
-                UserBookAuthor.objects.create(book=book, author=author)
+                UserBookAuthor.objects.create(book=book, name=author)
 
             return Response(UserBookReadSerializer(book).data, status=201)
 

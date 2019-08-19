@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { searchBooks } from '../utility/bookSearchHelper';
-import BookSearchList from './BookSearchList';
+import { TextInput } from './styled';
+import { searchBooks } from '../utility/userBookHelpers';
+import BookList from './BookList';
+import NewBookCard from './NewBookCard';
 import createBook from '../utility/createBook';
 
-function NewEntry(props) {
+const NewEntry = (props) => {
     const [query, setQuery] = useState('');
     const [books, setBooks] = useState([]);
 
@@ -24,10 +26,10 @@ function NewEntry(props) {
     return (
         <React.Fragment>
             <form onSubmit={searchBooksHandler}>
-                <input type="text" value={query} name="query" placeholder="Search Books" onChange={handleQueryChange} />
+                <TextInput type="text" value={query} name="query" placeholder="Search Books" onChange={handleQueryChange} />
             </form>
 
-            <BookSearchList books={books} />
+            <BookList books={books} BookComponent={NewBookCard} />
         </React.Fragment>
     )
 }

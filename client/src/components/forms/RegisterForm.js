@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { register } from '../../utility/requestHelper';
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -9,9 +10,8 @@ const LoginForm = () => {
     const submitRegister = event => {
         event.preventDefault();
 
-        // login(username, password)
-        //     .catch(errors => this.setState({ errors }));
-        console.log(username, email, password);
+        register(username, email, password)
+            .catch(newErrors => setErrors(errors));
     }
 
     return (

@@ -1,12 +1,28 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Link, withRouter } from "react-router-dom";
+import { Container } from './styled';
 import { logOutUser } from '../utility/tokenHelper';
+import routeDefinitions from '../routeDefinitions';
 
-function Nav(props) {
+const NavWrapper = styled.nav`
+    padding: 30px 0;
+
+    ul {
+        padding: 0;
+
+        li {
+            list-style-type: none;
+            display: inline-block;
+            margin-right: 15px;
+        }
+    }
+`;
+
+const loggedOutNav = () => {
     return (
-        <nav>
-            <ul>
+        <>
             <li>
                 <Link to="/">Home</Link>
             </li>
@@ -14,25 +30,48 @@ function Nav(props) {
                 <Link to="/login">Login</Link>
             </li>
             <li>
-                <Link to="/list">List</Link>
-            </li>
-            <li>
                 <Link to="/register">Register</Link>
             </li>
+        </>
+    )
+};
+
+const loggedInNav = user => {
+    return (
+        <>
             <li>
-                { props.user ? props.user.username : 'Not signed in' }
+                <Link to={routeDefinitions.list(user.username)}>List</Link>
             </li>
-            <li onClick={logOutUser}>
-                Log out
+            <li>
+                <Link to={routeDefinitions.add(user.username)}>Add Book</Link>
             </li>
-            </ul>
-        </nav>
+            <li>
+                <Link to={routeDefinitions.searchUsers}>Search Users</Link>
+            </li>
+            <li>
+                <button onClick={logOutUser}>Log out</button>
+            </li>
+        </>
+    )
+};
+
+const Nav = ({ user, activeUsername }) => {
+    return (
+        <NavWrapper>
+            <Container>
+                <h3>publist{activeUsername ? ` / ${activeUsername}` : ''}</h3>
+                <ul>
+                    { user ? loggedInNav(user) : loggedOutNav() }
+                </ul>
+            </Container>
+        </NavWrapper>
     )
 }
 
 const mapStateToProps = state => {
     return {
-        user: state.user
+        user: state.user.user,
+        activeUsername: state.activeUser.username
     }
 }
 

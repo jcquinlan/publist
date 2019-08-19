@@ -1,13 +1,28 @@
-import React from 'react';
-import NewEntry from '../components/NewEntry';
+import React, { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { Container } from '../components/styled';
+import BookList from '../components/BookList';
+import BookRecommendationCard from '../components/BookRecommendationCard';
+import { fetchAllBooks } from '../utility/userBookHelpers';
+import { setActiveUserAction } from '../redux/actions';
 
-const ListPage = (props) => {
+const ListPage = ({ user, match }) => {
+    const [books, setBooks] = useState([]);
+    const dispatch = useDispatch();
+    dispatch(setActiveUserAction(match.params.username));
+
+    useEffect(() => {
+        fetchAllBooks(match.params.username)
+            .then(response => {
+                setBooks(response)
+            })
+    }, []);
+
     return (
-        <React.Fragment>
-            List Page!
-            <NewEntry />
-        </React.Fragment>
-    );
-}
+        <Container>
+            <BookList books={books} BookComponent={BookRecommendationCard}/>
+        </Container>
+    )
+};
 
 export default ListPage;
