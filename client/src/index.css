@@ -1,5 +1,7 @@
 html {
   background-color: #fefefe; 
+  color: #333;
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -14,4 +16,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+
+h1, h2, h3, h4, h5 {
+  font-family: "DM Serif Text", serif;
+}
+
+p, a, li, span, button {
+  font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }

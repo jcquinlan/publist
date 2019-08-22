@@ -14,12 +14,12 @@ const BookCard = styled.div`
     opacity: ${ props => props.deactivated ? '0.1' : '1' };
 
     :hover {
-        transform: translateX(15px);
+        transform: translateX(5px);
         border-color: #ddd;
     }
     
     ${ props => !props.selected ? '' : css`
-        transform: translateX(15px);
+        transform: translateX(5px);
         border-color: #ddd;`
     }
 `;

@@ -9,6 +9,7 @@ const Header = styled.h3`
 `;
 
 const Subheader = styled.h5`
+    font-family: 'Open Sans', Arial, Helvetica, sans-serif;
     margin: 5px 0;
 `;
 

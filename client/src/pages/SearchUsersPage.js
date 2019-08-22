@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Container, TextInput } from '../components/styled';
 import { searchUsers } from '../utility/userSearchHelpers';
+import UserList from '../components/UserList';
 
 const SearchUsersPage = () => {
     const [usernameQuery, setUsernameQuery] = useState('');
+    const [users, setUsers] = useState([]);
 
     const handleQueryChange = event => {
         setUsernameQuery(event.target.value);
@@ -13,16 +15,17 @@ const SearchUsersPage = () => {
         event.preventDefault();
         searchUsers(usernameQuery)
             .then(response => {
-                console.log(response);
+                setUsers(response);
             });
     }
 
     return (
         <Container>
-            Search Users Page
             <form onSubmit={handleUserSearch}>
                 <TextInput placeholder="Search User Accounts" onChange={handleQueryChange}/>
             </form>
+
+            <UserList users={users} />
         </Container>
     )
 }

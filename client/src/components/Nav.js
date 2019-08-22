@@ -20,6 +20,10 @@ const NavWrapper = styled.nav`
     }
 `;
 
+const Logo = styled.h2`
+    font-size: 24px;
+`;
+
 const loggedOutNav = () => {
     return (
         <>
@@ -59,7 +63,7 @@ const Nav = ({ user, activeUsername }) => {
     return (
         <NavWrapper>
             <Container>
-                <h3>publist{activeUsername ? ` / ${activeUsername}` : ''}</h3>
+                <Logo>publist</Logo>
                 <ul>
                     { user ? loggedInNav(user) : loggedOutNav() }
                 </ul>

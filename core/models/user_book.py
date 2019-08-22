@@ -14,3 +14,4 @@ class UserBook(models.Model):
     thumbnail = models.URLField(null=True)
     small_thumbnail = models.URLField(null=True)
     explanation = models.TextField(max_length=512, null=True)
+    archived = models.BooleanField(default=False)

@@ -27,12 +27,32 @@ const VotingWrapper = styled.div`
     position: relative;
 `;
 
+const GhostText = styled.p`
+    font-size: 14px;
+    color: #bbb;
+`;
+
+const missingExplanationText = <GhostText>Whoever recommended this book didn't feel like explaining why.</GhostText>
+
 const ActiveBookRecommendationUI = ({ book, activeBook, selectBook }) => {
     const isActive = activeBook && activeBook === book;
+    const currentUser = useSelector(state => state.user.user);
+    const currentActiveUser = useSelector(state => state.activeUser.username);
+    const isOwnersBook = currentUser && currentUser.username === currentActiveUser;
     const wrapperRef = useRef(null);
+
     useClickOutsideRef(wrapperRef, () => {
         selectBook(null);
     });
+
+    const renderOwnerButtons = () => {
+        if (!isOwnersBook) return;
+
+        return [
+            <button>Delete</button>,
+            <button>Mark Completed</button>
+        ]
+    }
 
     return (
         <RecommendedBookCard
@@ -49,12 +69,11 @@ const ActiveBookRecommendationUI = ({ book, activeBook, selectBook }) => {
                 </div>
 
                 <div>
-                    <TruncateText>{book.explanation}</TruncateText>
+                    <TruncateText>{book.explanation || missingExplanationText }</TruncateText>
                 </div>
 
                 <BookCardFooter>
-                    <button>Delete</button>
-                    <button>Mark Completed</button>
+                    { renderOwnerButtons() } 
                 </BookCardFooter>
             </BookCardBody>
         </RecommendedBookCard>
