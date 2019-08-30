@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { NarrowContainer } from './styled';
 
+const emptyState = <center>Nothing yet, mate. Maybe <a href="https://en.wikipedia.org/wiki/Special:Random">this will tide you over for now.</a></center>
+
 function BookList({ books, BookComponent }) {
     const [activeBook, setActiveBook] = useState(null);
 
@@ -15,7 +17,7 @@ function BookList({ books, BookComponent }) {
         });
     };
 
-    return books ? <NarrowContainer>{renderBooks()}</NarrowContainer> : null;
+    return books.length ? <NarrowContainer>{renderBooks()}</NarrowContainer> : emptyState;
 }
 
 export default BookList;

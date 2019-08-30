@@ -20,7 +20,7 @@ class SearchBooksView(APIView):
         Handles user searches for books from the Google Books API
         """
         query = request.data.get('query')
-        request_url = 'https://www.googleapis.com/books/v1/volumes?q={0}&key={1}' \
+        request_url = 'https://www.googleapis.com/books/v1/volumes?q={0}&key={1}&maxResults=40' \
             .format(query, settings.GOOGLE_BOOKS_API_KEY)
 
         search_results = requests.get(request_url)

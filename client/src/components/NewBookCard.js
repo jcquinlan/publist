@@ -12,7 +12,10 @@ import {
     BookCardBody,
     BookCardHeader,
     BookCardFooter,
-    BookCardImage
+    BookCardImage,
+    Button,
+    ButtonRow,
+    GhostButton
  } from './styled';
 import useClickOutsideRef from '../hooks/useClickOutsideRef';
 import { createBookRecommendation } from '../utility/userBookHelpers';
@@ -23,6 +26,10 @@ const SaveBookCardBody = styled(BookCardBody)`
 
 const NewBookTextArea = styled(TextArea)`
     height: 100%;
+`;
+
+const SaveButton = styled(Button)`
+    height: auto;
 `;
 
 const SaveNewBookCard = ({ book, selectBook }) => {
@@ -53,8 +60,10 @@ const SaveNewBookCard = ({ book, selectBook }) => {
             </Flex>
 
             <BookCardFooter>
-                <button onClick={saveBook}>Save</button>
-                <button onClick={() => selectBook(null)}>Cancel</button>
+                <Flex justifyContent="space-between">
+                    <SaveButton onClick={saveBook}>Save</SaveButton>
+                    <GhostButton onClick={() => selectBook(null)}>Cancel</GhostButton>
+                </Flex>
             </BookCardFooter>
         </SaveBookCardBody> 
     )

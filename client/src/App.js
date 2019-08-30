@@ -4,10 +4,7 @@ import history from './history';
 import { LoginPage, RegisterPage, SearchPage, ListPage, SearchUsersPage } from './pages';
 import { checkForAuthTokens } from './utility/tokenHelper';
 import Nav from './components/Nav';
-
-function Index() {
-    return <h2>Home</h2>;
-}
+import Footer from './components/Footer';
 
 function App(props) {
     checkForAuthTokens();
@@ -16,13 +13,13 @@ function App(props) {
         <Router history={history}>
             <Nav />
             <Switch> 
-                <Route exact path="/" component={Index} />
-                <Route path="/login" component={LoginPage} />
+                <Route exact path="/" component={LoginPage} />
                 <Route path="/search" component={SearchUsersPage} />
                 <Route path="/register" component={RegisterPage} />
                 <Route path="/:username/add" component={SearchPage} />
                 <Route path="/:username" component={ListPage} />
             </Switch>
+            <Footer />
         </Router>
     );
 }

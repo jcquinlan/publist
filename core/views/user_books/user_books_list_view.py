@@ -31,7 +31,8 @@ class UserBooksListView(APIView):
     @transaction.atomic
     def post(self, request, username):
         user = get_object_or_404(User, username=username)
-        data = humps.decamelize(request.data)
+        # data = humps.decamelize(request.data)
+        data = request.data
         authors = data.pop('authors', [])
         genres = data.pop('genres', [])
 
@@ -46,6 +47,9 @@ class UserBooksListView(APIView):
             for author in authors:
                 UserBookAuthor.objects.create(book=book, name=author)
 
-            return Response(UserBookReadSerializer(book).data, status=201)
+            return Response(
+                UserBookReadSerializer(book, context={'request': request}).data,
+                status=201
+            )
 
         return Response(serializer.errors, status=400)

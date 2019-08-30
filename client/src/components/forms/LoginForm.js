@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
+import { FormCard, TextInput, Button } from '../styled';
 import { login } from '../../utility/requestHelper';
+
+const NarrowFormCard = styled(FormCard)`
+    max-width: 600px;
+`;
 
 const LoginForm = () => {
     const [username, setUsername] = useState('');
@@ -14,12 +20,14 @@ const LoginForm = () => {
     }
 
     return (
-        <form onSubmit={submitLogin}>
-            <input type="text" placeholder="username" name="username" onChange={event => setUsername(event.target.value)} />
-            <input type="password" placeholder="password" name="password" onChange={event => setPassword(event.target.value)} />
+        <NarrowFormCard>
+            <form onSubmit={submitLogin}>
+                <TextInput type="text" placeholder="username" name="username" onChange={event => setUsername(event.target.value)} />
+                <TextInput type="password" placeholder="password" name="password" onChange={event => setPassword(event.target.value)} />
 
-            <button onClick={submitLogin}>Submit</button>
-        </form>
+                <Button onClick={submitLogin}>Submit</Button>
+            </form>
+        </NarrowFormCard>
     );
 }
 

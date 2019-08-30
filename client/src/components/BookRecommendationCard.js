@@ -7,7 +7,11 @@ import {
     BookCardImage,
     BookCardHeader,
     BookCardBody,
-    BookCardFooter } from './styled';
+    BookCardFooter,
+    GhostButton,
+    Button,
+    Flex
+} from './styled';
 import TruncateText from './TruncateText';
 import { VotingAside, VotingAsideContainer } from './VotingAside';
 import useClickOutsideRef from '../hooks/useClickOutsideRef';
@@ -48,10 +52,12 @@ const ActiveBookRecommendationUI = ({ book, activeBook, selectBook }) => {
     const renderOwnerButtons = () => {
         if (!isOwnersBook) return;
 
-        return [
-            <button>Delete</button>,
-            <button>Mark Completed</button>
-        ]
+        return (
+            <Flex justifyContent="space-between">
+                <GhostButton>Delete</GhostButton>,
+                <Button>Mark Read</Button>
+            </Flex>
+        )
     }
 
     return (
@@ -69,7 +75,7 @@ const ActiveBookRecommendationUI = ({ book, activeBook, selectBook }) => {
                 </div>
 
                 <div>
-                    <TruncateText>{book.explanation || missingExplanationText }</TruncateText>
+                    <TruncateText>{book.explanation ? `"${book.explanation}"` : missingExplanationText }</TruncateText>
                 </div>
 
                 <BookCardFooter>

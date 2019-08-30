@@ -15,4 +15,14 @@ const CardContainer = styled.div`
     }
 `;
 
-export { Card, CardContainer };
+const FormCard = styled(Card)`
+    input {
+        margin-bottom: 15px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+`;
+
+export { Card, CardContainer, FormCard };

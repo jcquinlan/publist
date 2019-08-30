@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled, { css } from 'styled-components';
+import Colors from './styled/colors';
 import { voteOnBook } from '../utility/userBookHelpers';
 
 const arrowStyles = css`
@@ -16,15 +17,26 @@ const disabledArrowStyles = css`
     opacity: 0.5;
 `;
 
+const activeArrowStyles = css`
+    border-bottom-color: ${ Colors.primary };
+    cursor: initial;
+
+    &:hover {
+        border-bottom-color: ${ Colors.primary };
+    }
+`
+
 const UpArrow = styled.div`
     ${ arrowStyles }
+    border-bottom: 15px solid #ddd;
     ${ props => props.disabled ? disabledArrowStyles : '' }
+    ${ props => props.active ? activeArrowStyles : '' };
 
     &:hover {
         ${ props => props.disabled ? '' : 'border-bottom-color: #bbb' };
+        ${ props => props.active ? `border-bottom-color: ${ Colors.primary }` : '' };
     }
 
-    border-bottom: 15px solid #ddd;
 `;
 
 const DownArrow = styled.div`
@@ -71,9 +83,9 @@ const VotingAside = ({ book, allowVoting }) => {
 
     return (
             <VotingAsideContainer>
-                { !hasVoted && <UpArrow disabled={!allowVoting} onClick={() => vote('inc')}/>}
+                { <UpArrow active={hasVoted} disabled={!allowVoting} onClick={() => vote('inc')}/>}
                 <span>{votes}</span>
-                { hasVoted && <DownArrow disabled={!allowVoting} onClick={() => vote('dec')}/>}
+                { <DownArrow disabled={!hasVoted || !allowVoting} onClick={() => vote('dec')}/>}
             </VotingAsideContainer>
     )
 };

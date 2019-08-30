@@ -2,7 +2,6 @@ import styled from 'styled-components';
 import Colors from './colors';
 
 const Button = styled.button`
-    height: fit-content;
     padding: 10px;
     background-color: ${ props => props.danger ? Colors.danger : Colors.primary };
     color: #fff;
@@ -11,6 +10,7 @@ const Button = styled.button`
     border-radius: 100px;
     border: none;
     outline: none;
+    min-width: 80px;
 
     &:hover {
         background-color: ${ Colors.primaryLighter }
@@ -18,19 +18,27 @@ const Button = styled.button`
 `;
 
 const GhostButton = styled.button`
-    font-size: 14px;
+    font-size: 16px;
     background-color: transparent;
     text-decoration: underline;
     border: none;
-    color: ${ Colors.primary };
     cursor: pointer;
     transition: 0.3s;
     outline: none;
-    height: fit-content;
+    background-image: linear-gradient( transparent 0%, transparent calc(50% - 8px), rgba(119, 15, 255, 0.10) calc(50% - 8px), rgba(119, 15, 255, 0.10) 100% );
+    background-size: 100% 200%;
+    background-position: 0 0;
+    text-decoration: none;
+`;
 
-    &:hover {
-        color: ${ Colors.primaryLighter }
+const ButtonRow = styled.div`
+    ${Button} {
+        margin-right: 10px;
+
+        &:last-child {
+            margin-right: 0;
+        }
     }
 `;
 
-export { Button, GhostButton };
+export { Button, GhostButton, ButtonRow };

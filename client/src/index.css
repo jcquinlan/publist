@@ -1,5 +1,5 @@
 html {
-  background-color: #fefefe; 
+  background-color: #fafafa; 
   color: #333;
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
 }
@@ -24,4 +24,12 @@ h1, h2, h3, h4, h5 {
 
 p, a, li, span, button {
   font-family: 'Open Sans', Arial, Helvetica, sans-serif;
+}
+
+a {
+  color: #333;
+  background-image: linear-gradient( transparent 0%, transparent calc(50% - 8px), rgba(119, 15, 255, 0.10) calc(50% - 8px), rgba(119, 15, 255, 0.10) 100% );
+  background-size: 100% 200%;
+  background-position: 0 0;
+  text-decoration: none;
 }
